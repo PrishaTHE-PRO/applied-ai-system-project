@@ -35,7 +35,7 @@ Your final app should:
 
 ## 📸 Demo
 
-<a href="/course_images/ai110/pawpal_screenshot.png" target="_blank"><img src='/course_images/ai110/pawpal_screenshot.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
+<a href="/course_images/ai110/Screenshot 2026-03-29 at 9.51.06 PM.png" target="_blank"><img src='/course_images/ai110/Screenshot 2026-03-29 at 9.51.06 PM.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
 
 ## Smarter Scheduling
 
