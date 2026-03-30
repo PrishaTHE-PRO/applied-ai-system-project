@@ -31,6 +31,26 @@ The `Scheduler` class in `pawpal_system.py` goes beyond a simple task list with 
 - **Conflict detection** — `detect_conflicts()` uses interval intersection (`a_start < b_end and b_start < a_end`) to find overlapping tasks and returns human-readable warning strings instead of crashing.
 - **Recurring tasks** — `mark_task_complete()` calls `next_occurrence()` on any task with a `frequency`, which uses `date.today() + timedelta` to schedule the next real calendar date (`daily` → +1 day, `weekly` → +7 days) and re-queues it on the correct pet.
 
+## Testing PawPal+
+
+Run the full test suite with:
+
+```bash
+python -m pytest
+```
+
+The suite contains **26 tests** across four classes:
+
+| Area | What's covered |
+|---|---|
+| `Task` | mark complete, reschedule, daily/weekly recurrence, no-frequency returns None, missing time defaults |
+| `Pet` | add/get/remove tasks, pending filter, edge case: pet with no tasks |
+| `Owner` | add/remove pets, flatten tasks across multiple pets, edge case: owner with no pets |
+| `Scheduler` | schedule ordering, chronological sort, unscheduled tasks sort last, filter by status and pet name, overlap conflict detection, exact-same-start-time conflict, warning strings (not tuples), recurring re-queue, one-off tasks don't re-queue, empty schedule |
+
+**Confidence level: ★★★★☆**
+Core scheduling behaviors are fully covered. The remaining gap is date-boundary edge cases for recurring tasks (e.g. tasks crossing midnight or spanning multiple days).
+
 ## Getting started
 
 ### Setup

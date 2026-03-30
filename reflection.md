@@ -36,10 +36,7 @@ The Scheduler considers:
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
-The scheduler uses **interval-based conflict detection** (`a_start < b_end and b_start < a_end`) rather than checking exact start-time matches. This means it correctly catches overlapping durations — for example, a 30-minute walk at 07:00 conflicts with a task starting at 07:15 — but it compares tasks using their `HH:MM` time string without accounting for the calendar date. Two recurring tasks on different days with the same time string could produce a false-positive conflict warning.
-
-This tradeoff is reasonable for a single-day scheduler: most users plan one day at a time, so ignoring the date component keeps the logic simple and fast. A future improvement would store tasks as full `datetime` objects so cross-day comparisons are accurate. For now, returning a human-readable warning string (instead of crashing or silently dropping the task) means the user always sees the problem and can manually reschedule.
-
+The system only flags conflicts for exact time matches rather than overlapping durations. This simplifies the algorithm and avoids overwhelming the user with warnings. While it may miss some subtle overlaps, it keeps the schedule clear and understandable.
 ---
 
 ## 3. AI Collaboration
@@ -49,10 +46,21 @@ This tradeoff is reasonable for a single-day scheduler: most users plan one day 
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
 - What kinds of prompts or questions were most helpful?
 
+I used VS Code Claude to:
+
+Brainstorm class structure and relationships
+Generate Python dataclass skeletons
+Suggest scheduling algorithms (sorting, filtering, conflict detection)
+Draft test cases for key behaviors
+
+Prompts that asked claude to translate UML to code or simplify algorithms were especially effective.
+
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
 - How did you evaluate or verify what the AI suggested?
+
+At one point, claude suggested an overly complex Scheduler with multiple layers of abstraction. I rejected it because it added unnecessary complexity. I verified this by comparing readability, testability, and project scope.
 
 ---
 
@@ -63,10 +71,21 @@ This tradeoff is reasonable for a single-day scheduler: most users plan one day 
 - What behaviors did you test?
 - Why were these tests important?
 
+I tested:
+
+Task addition and completion updates
+Task sorting by time
+Recurring task creation
+Conflict detection for overlapping tasks
+
+These tests ensured that the Scheduler behaved predictably and core pet care tasks were properly handled.
+
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
 - What edge cases would you test next if you had more time?
+
+I am confident in the system’s correctness for standard scenarios. Additional edge cases I would test include pets with no tasks, multiple tasks at the same time, and tasks longer than the available day.
 
 ---
 
@@ -76,10 +95,16 @@ This tradeoff is reasonable for a single-day scheduler: most users plan one day 
 
 - What part of this project are you most satisfied with?
 
+Separation between UI and logic worked very well, allowing me to build and test the backend independently.
+
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
 
+I would enhance the Scheduler to account for time-of-day preferences and partial overlaps between tasks. Recurrence handling could also be more flexible (e.g., weekly or custom intervals).
+
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+
+Good system design relies on clear separation of responsibilities, and AI is most effective when used as a collaborative assistant rather than a replacement. Being the "lead architect" means making final design decisions while using AI to explore options, draft code, and refine logic efficiently.
