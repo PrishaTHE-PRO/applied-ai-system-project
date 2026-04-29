@@ -2,7 +2,7 @@
 
 A Streamlit pet-care assistant extended with **Retrieval-Augmented Generation (RAG)**, **Claude API integration**, **safety guardrails**, and an **automated reliability harness**.
 
-> **🎥 Walkthrough video:** [Loom link — paste yours here]
+> **🎥 Walkthrough video:** [Walkthrough](https://www.loom.com/share/c856d1bfe19c4756a2628c1a8c49076c)
 
 ---
 
