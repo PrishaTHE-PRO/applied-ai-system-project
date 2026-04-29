@@ -35,7 +35,7 @@ Your final app should:
 
 ## 📸 Demo
 
-![PawPal App](image.png)
+![PawPal App](mermaidDiagram.png)
 
 ## Smarter Scheduling
 
